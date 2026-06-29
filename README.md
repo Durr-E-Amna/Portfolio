@@ -12,13 +12,6 @@ npm run build    # production build → dist/
 npm run preview  # preview the production build
 ```
 
-## Deploy to Vercel
-
-1. Push this folder to a GitHub repo.
-2. On vercel.com → New Project → import the repo.
-3. Vercel auto-detects Vite. Framework preset: **Vite**. Build command `npm run build`, output `dist`.
-4. Deploy. `vercel.json` already handles SPA routing.
-
 ## Structure
 
 ```
