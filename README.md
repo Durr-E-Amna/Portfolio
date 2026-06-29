@@ -4,8 +4,10 @@ A dark, living portfolio built with **React + Vite + Tailwind CSS + Framer Motio
 Dual-lens design: one toggle splits the work into **AI/ML** and **Design / Full-Stack**.
 
 Preview:
+
 ![Portfolio demo](Portfolio-Preview.gif)
 
+demo link: https://portfolio-pi-sooty-20.vercel.app/
 ## Run it
 
 ```bash
