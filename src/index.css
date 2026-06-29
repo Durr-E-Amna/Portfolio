@@ -1,0 +1,111 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #1B1817;
+  color: #F2EDE7;
+  font-family: 'Space Mono', monospace;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #1B1817; }
+::-webkit-scrollbar-thumb {
+  background: #38322E;
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: #4a423c; }
+
+/* Film grain overlay */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* selection */
+::selection {
+  background: #8FE3C0;
+  color: #0D1F17;
+}
+
+.text-gradient {
+  background: linear-gradient(90deg, #8FE3C0, #F0A8C4);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ============================================================
+   SKILL FAN — held-hand-of-cards layout for the skills section.
+   Base rotation/offset comes from --r / --y custom properties
+   set inline per-card; keeping transform itself in the
+   stylesheet (not inline) lets :hover cleanly override it.
+   ============================================================ */
+.skill-fan-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  padding: 0 70px 60px;
+}
+
+/* All cards share ONE fixed size, tall enough for the biggest
+   category (Web & Backend, 10 items). Nothing is clipped or hidden —
+   every skill is rendered. Cards overlap heavily; on hover the card
+   pulls up above its neighbours so its full content is unobstructed. */
+.skill-card {
+  position: relative;
+  margin-left: -55px;
+  margin-right: -55px;
+  width: 210px;
+  height: 360px;
+  background: #241F1D;
+  border: 1px solid #38322E;
+  border-radius: 16px;
+  padding: 1.5rem;
+  transform: rotate(var(--r, 0deg)) translateY(var(--y, 0px));
+  transform-origin: bottom center;
+  transition: transform 0.42s cubic-bezier(.34, 1.4, .5, 1),
+              box-shadow 0.42s ease, border-color 0.3s ease;
+  z-index: var(--z, 1);
+}
+
+.skill-card:hover {
+  transform: rotate(0deg) translateY(-44px) scale(1.05);
+  z-index: 60;
+  border-color: #8FE3C0;
+  box-shadow: 0 30px 60px -25px rgba(143, 227, 192, 0.5);
+}
+
+.skill-card.lens-pink:hover {
+  border-color: #F0A8C4;
+  box-shadow: 0 30px 60px -25px rgba(240, 168, 196, 0.5);
+}
+
+/* mobile: fan doesn't work at narrow widths — fall back to a clean stack */
+@media (max-width: 820px) {
+  .skill-card {
+    margin: 0 !important;
+    transform: none !important;
+    height: auto !important; min-height: 360px;
+  }
+  .skill-card:hover {
+    transform: translateY(-6px) !important;
+  }
+}
